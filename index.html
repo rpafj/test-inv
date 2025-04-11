@@ -49,6 +49,31 @@
             border-radius: 5px;
             cursor: pointer;
         }
+        .accept-btn {
+            background-color: #2ecc71;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-right: 10px;
+        }
+        .reject-btn {
+            background-color: #e74c3c;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            position: relative;
+            transition: all 0.1s ease;
+        }
+        .buttons-container {
+            margin-top: 30px;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
         .emojis {
             display: flex;
             justify-content: center;
@@ -96,7 +121,36 @@
                 <p>Local: bonnie pizzaria</p>
             </div>
             <p>By Raphael Portela de Araujo Jansen Ferreira</p>
+            <div class="buttons-container">
+                <button class="accept-btn" onclick="alert('Ótima escolha, nos vemos em breve futura Psico Maiara!')">Aceitar</button>
+                <button class="reject-btn" id="rejectBtn">Recusar</button>
+            </div>
         </div>
     </div>
+    <script>
+        const rejectBtn = document.getElementById('rejectBtn');
+        
+        function moveButton() {
+            const container = document.querySelector('.invitation');
+            const containerRect = container.getBoundingClientRect();
+            const buttonRect = rejectBtn.getBoundingClientRect();
+            
+            const maxX = containerRect.width - buttonRect.width;
+            const maxY = containerRect.height - buttonRect.height;
+            
+            const randomX = Math.floor(Math.random() * maxX);
+            const randomY = Math.floor(Math.random() * maxY);
+            
+            rejectBtn.style.position = 'absolute';
+            rejectBtn.style.left = randomX + 'px';
+            rejectBtn.style.top = randomY + 'px';
+        }
+        
+        rejectBtn.addEventListener('mouseover', moveButton);
+        rejectBtn.addEventListener('touchstart', (e) => {
+            e.preventDefault();
+            moveButton();
+        });
+    </script>
 </body>
 </html>
